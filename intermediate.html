@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Intermediate HTML, CSS AND JavaScript Task</title>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f4f4f4;
+      }
+
+      h1,
+      h2 {
+        text-align: center;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        max-width: 1000px;
+        margin: auto;
+      }
+
+      form,
+      .todo {
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      form input,
+      form button,
+      .todo input,
+      .todo button {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+
+      .todo ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .todo li {
+        padding: 8px 10px;
+        background: #e8f0fe;
+        margin: 5px 0;
+        border-radius: 5px;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-around;
+        background: #007acc;
+        color: white;
+        padding: 10px;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav>
+      <div>Home</div>
+      <div>Contact</div>
+      <div>To-Do</div>
+    </nav>
+
+    <h1>Task 2: Intermediate HTML, CSS and JavaScript</h1>
+
+    <div class="container">
+      <!-- Contact Form -->
+      <form id="contactForm">
+        <h2>Contact Form</h2>
+        <input type="text" id="name" placeholder="Enter your name" required />
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        />
+        <input
+          type="text"
+          id="message"
+          placeholder="Enter your message"
+          required
+        />
+        <button type="submit">Submit</button>
+        <p id="formMessage" style="color: green"></p>
+      </form>
+
+      <!-- To-Do List -->
+      <div class="todo">
+        <h2>To-Do List</h2>
+        <input type="text" id="taskInput" placeholder="Add a new task" />
+        <button onclick="addTask()">Add Task</button>
+        <ul id="taskList"></ul>
+      </div>
+    </div>
+
+    <script>
+      //Form Validation
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          const name = document.getElementById("name").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const message = document.getElementById("message").value.trim();
+          const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+
+          if (!name || !email || !message) {
+            alert("All fields are required!");
+            return;
+          }
+
+          if (!email.match(emailPattern)) {
+            alert("Enter a valid email!");
+            return;
+          }
+
+          document.getElementById("formMessage").textContent =
+            "Form submitted successfully!";
+          this.reset();
+        });
+
+      //To-Do List
+      function addTask() {
+        const taskInput = document.getElementById("taskInput");
+        const taskText = taskInput.value.trim();
+        if (taskText === "") return;
+
+        const li = document.createElement("li");
+        li.textContent = taskText;
+        document.getElementById("taskList").appendChild(li);
+        taskInput.value = "";
+      }
+    </script>
+  </body>
+</html>
